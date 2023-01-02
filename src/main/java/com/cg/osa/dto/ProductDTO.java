@@ -21,6 +21,10 @@ import javax.validation.constraints.NotNull;
 
 
 
+
+
+
+
 @Entity
 @Table(name="product_table")
 public class ProductDTO {
