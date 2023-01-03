@@ -81,7 +81,7 @@ class OnlineShoppingApplicationTests {
 				product.setProductName("fan");
 				product.setPrice(10.0);
 				product.setColor("yellow");
-				product.setDimmension(" 5 radius");
+				product.setDimension(" 5 radius");
 				product.setManufacturer("bajaj");
 				product.setQuantity(10);
 				product.setSpecification("white");
@@ -90,7 +90,7 @@ class OnlineShoppingApplicationTests {
 			}
 			//Testing for inserting the Product
 			@Test
-			public void testInsertProduct()  {
+			public void testInsertProduct() throws ProductException  {
 				ProductDTO product =  new ProductDTO();
 				product.setProductId(1);
 				product.setProductName("chips");

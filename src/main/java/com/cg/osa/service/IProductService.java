@@ -7,7 +7,7 @@ import com.cg.osa.exception.ProductException;
 
 public interface IProductService {
 	public List<ProductDTO> viewAllProducts();
-	public ProductDTO addProduct(ProductDTO product);
+	public ProductDTO addProduct(ProductDTO product)throws ProductException;
 	public ProductDTO updateProduct(ProductDTO product)throws ProductException;
 	public ProductDTO viewProductbyid(int id)throws ProductException;
 	public ProductDTO removeProduct(int id)throws ProductException;

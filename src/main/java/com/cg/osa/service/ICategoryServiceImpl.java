@@ -17,9 +17,16 @@ public class ICategoryServiceImpl implements ICategoryService{
 	private ICategoryRepository categoryRepository;
 
 	@Override
-	public CategoryDTO addCategory(@RequestBody CategoryDTO category) {
-		categoryRepository.save(category);
-		return category;
+	public CategoryDTO addCategory(@RequestBody CategoryDTO category)throws CategoryException {
+		if(categoryRepository.existsById(category.getCatId())) {
+			throw new CategoryException("category alresy exixts");
+		}
+		else {
+			categoryRepository.save(category);
+			return category;
+			
+		}
+		
 	}
 
 	@Override

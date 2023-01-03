@@ -2,6 +2,7 @@ package com.cg.osa.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,9 +20,14 @@ public class IProductServiceImpl implements IProductService{
 		List<ProductDTO> list=productrepository.findAll();
 		return list;
 	}
-	public ProductDTO addProduct(ProductDTO product) {
-		productrepository.save(product);
-		return product;
+	public ProductDTO addProduct(ProductDTO product)throws ProductException {
+		if(productrepository.existsById(product.getProductId())) {
+			throw new ProductException("prodcut Id alreay exists");
+		}else {
+			return productrepository.save(product);
+			
+		}
+		
 	}
 	
 	public ProductDTO updateProduct(ProductDTO product) throws ProductException{
@@ -53,14 +59,10 @@ public class IProductServiceImpl implements IProductService{
 
 	public List<ProductDTO> viewProductsByCatname(String cname)throws ProductException {
 		List<ProductDTO> list= productrepository.findAll();
-	 	  List<ProductDTO> cat = new ArrayList<ProductDTO>();
-	 	  for(int i=0;i<list.size();i++) {
-	 		 ProductDTO c1=list.get(i);
-	 		  if(cname.equals(c1.getCategory().getCatName())) {
-	 			 cat.add(c1); 
-	 			
-	 		  }
-	 	  }
+
+		 List<ProductDTO> cat =	  list.stream()
+	 	  .filter(productDTO->productDTO.getCategory().getCatName().equals(cname))
+	 	  .collect(Collectors.toList());
 	 	  if(cat.size()!=0) {
 	 		  return cat;
 	 	  }

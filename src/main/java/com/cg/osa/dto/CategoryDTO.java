@@ -7,6 +7,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 
@@ -15,11 +16,11 @@ import javax.validation.constraints.NotNull;
 @Table(name="category_table")
 public class CategoryDTO {
 	@Id
+	@NotNull(message="sorry id cannot be null")
 	@Column(name = "catid",length=20)
-	@NotNull
 	String catId;
+	@NotBlank(message = " enter the category")
 	@Column(name = "catname",length=20)
-	@NotNull(message = "cat name cannot be null")
 	String catName;
 
 	public CategoryDTO() {

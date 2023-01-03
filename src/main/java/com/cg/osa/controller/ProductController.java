@@ -26,6 +26,7 @@ import com.cg.osa.service.IProductServiceImpl;
 @RestController
 @RequestMapping("/onlineshoppingapplication")
 public class ProductController {
+
 	@Autowired
 	private IProductServiceImpl service;
 	/* @author Gayathri.M
@@ -43,7 +44,7 @@ public class ProductController {
 	 */
 	 
 	@PostMapping("/addproduct")
-	public ProductDTO addProduct(@Valid @RequestBody ProductDTO product) {
+	public ProductDTO addProduct(@Valid @RequestBody ProductDTO product) throws ProductException {
 		return service.addProduct(product);
 	}
 	@PutMapping("/updateproduct")

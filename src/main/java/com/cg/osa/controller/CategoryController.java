@@ -24,24 +24,44 @@ import com.cg.osa.service.ICategoryServiceImpl;
 public class CategoryController {
 	@Autowired
 	ICategoryServiceImpl categoryservice;
+	
+	/* @author Gayathri.M
+	 * @return CategoryDTO
+	 * @description this method adds the category
+	 
+	 */
 	@PostMapping("/addcategory")
-	public CategoryDTO addCategory(@Valid @RequestBody CategoryDTO category) {
+	public CategoryDTO addCategory(@Valid @RequestBody CategoryDTO category) throws CategoryException {
 		return categoryservice.addCategory(category);
 	}
-
+	
+	/* @author Gayathri.M
+	 * @return CategoryDTO
+	 * @description this method updates the category details of the existing category id
+	 
+	 */
 	@PutMapping("/updatecategory")
-	public CategoryDTO updateCategory(@Valid @RequestBody CategoryDTO category) throws CategoryException {
+	public CategoryDTO updateCategory(@Valid @RequestBody CategoryDTO category) throws CategoryException{
 		
 		return categoryservice.updateCategory(category);
 	}
 
+	/* @author Gayathri.M
+	 * @return CategoryDTO
+	 * @description this method deletes the category
+	 
+	 */
 	@DeleteMapping("/deletecategory/{id}")
 	public CategoryDTO removeCategory(@PathVariable("id") String id) throws CategoryException{
 		return categoryservice.removeCategory(id);
 	}
 	
 	
-	
+	/* @author Gayathri.M
+	 * @return list of CategoryDTO
+	 * @description this method gives all the categories
+	 
+	 */
 	@GetMapping("/getcategory")
 	public List<CategoryDTO> viewAllCategories() {
 		return categoryservice.viewAllCategories();

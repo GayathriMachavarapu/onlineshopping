@@ -27,8 +27,15 @@ public class ICustomerServiceImpl implements ICustomerService{
 	    	return cust;
 	    }
 	    public CustomerDTO updateCustomer(CustomerDTO cust)throws CustomerException {
-	    	customerRepository.save(cust);
-	    	return cust;
+	    	if(customerRepository.existsById(cust.getCustomerId())) {
+	    		customerRepository.save(cust);
+		    	return cust;
+	    		
+	    	}
+	    	else {
+	    		 throw new CustomerException("Id not found");
+	    		
+	    	}
 	    }
     public CustomerDTO removeCustomer(int id) throws CustomerException{
  	   if(customerRepository.existsById(id)) {

@@ -36,7 +36,7 @@ public class ICartServiceImpl implements ICartService{
 		return cart1;	
 		}
 		else {
-			throw new CartException("no cart id found");
+			throw new CartException("np cart id found");
 		}
 		
 	}
@@ -45,15 +45,21 @@ public class ICartServiceImpl implements ICartService{
 		if(cartRepository.existsById(cid)){
 			CartDTO cart1=cartRepository.findById(cid).get();
 					List<ProductDTO> p1=cart1.getProducts();
-     					if(p1.contains(pid)) {
-						  p1.remove(pid);
-						//cartRepository.deleteById(pid);
-						cartRepository.save(cart1);
+					List<ProductDTO> l=new ArrayList<ProductDTO>();
+					for(ProductDTO i:l) {
+						ProductDTO p=i;
+						if(p.getProductId()!=pid) {
+							l.add(p);
 					}
+					}
+					cart1.setProducts(l);
+
+					cartRepository.save(cart1);
+					
 					return cart1;
 		}
 		else {
-			throw new CartException("product not in cart");
+			throw new CartException("wrong cart id");
 		}
 	}
 
@@ -62,7 +68,6 @@ public class ICartServiceImpl implements ICartService{
 		if(cartRepository.existsById(cid)) {
 	
 			CartDTO cart1=cartRepository.findById(cid).get();
-			//List<ProductDTO> prd=cart1.getProducts();
 			cartRepository.save(cart1);
 			return cart1;
 		}
@@ -100,14 +105,11 @@ public class ICartServiceImpl implements ICartService{
 			return cart1;
 			}
 		else {
-			throw new CartException("prodcut not found");
+			throw new CartException("cart not found");
 			
 		}
-		
-		
-		
+				
 		
 	}
 
-	
 }

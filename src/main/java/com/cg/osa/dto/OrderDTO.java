@@ -17,25 +17,29 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 
 @Entity
 @Table(name="order_table")
 public class OrderDTO {
 	@Id
+	@NotNull(message="sorry id cannot be null")
 	int orderId;
 	@Column(name="orderDate")
 	LocalDate orderDate;
 	@Column(name="orderStatus")
+	@NotBlank(message = " orderstatus to be updated")
 	String orderStatus;
-	@OneToOne(cascade=CascadeType.ALL)
+	@OneToOne(cascade=CascadeType.MERGE)
 	@JoinColumn(name="customer_id")
 	CustomerDTO customer;
     @ManyToMany(cascade=CascadeType.ALL)
     @JoinTable(name = "product_order", joinColumns = { @JoinColumn(name = "order_id") }, inverseJoinColumns = { @JoinColumn(name = "product_id") })
 	List<ProductDTO> productList=new ArrayList<ProductDTO>();
 
-	@OneToOne(cascade=CascadeType.ALL)
+	@OneToOne//(cascade=CascadeType.ALL)
 	@JoinColumn(name="address_id")
 	AddressDTO address;
 

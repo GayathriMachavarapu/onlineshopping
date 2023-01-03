@@ -18,21 +18,14 @@ import javax.validation.constraints.NotNull;
 
 
 
-
-
-
-
-
-
-
 @Entity
 @Table(name="product_table")
 public class ProductDTO {
 	@Id
-	//@GeneratedValue(strategy = GenerationType.AUTO)
+
+    @NotNull(message = "prodcut id cannot be null")
 	@Column(name="pid")
-	@NotBlank(message = "prodcut id cannot be null")
-	int productId;
+	Integer productId;
 	@Column(name="productname")
 	@NotBlank(message = "product name cannot be null")
 	String productName;
@@ -43,9 +36,9 @@ public class ProductDTO {
 	@Column(name="color")
 	@NotBlank(message = "color cannot be null")
 	String color;
-	@Column(name="dimmension")
-	@NotBlank(message = "dimmension cannot be null")
-	String dimmension;
+	@Column(name="dimension")
+	@NotBlank(message = "dimension cannot be null")
+	String dimension;
 	@Column(name="specification")
 	@NotBlank(message = "specification cannot be null")
 	String specification;
@@ -53,22 +46,28 @@ public class ProductDTO {
 	@NotBlank(message = "manfacturer cannot be null")
 	String manufacturer;
 	@Column(name="quantity")
-	@NotBlank(message = "qnt cannot be null")
 	int quantity;
-	@OneToOne//(cascade=CascadeType.ALL)
+	@OneToOne(cascade=CascadeType.PERSIST)
 	@JoinColumn(name="catid")
 	CategoryDTO category;
+
 	public ProductDTO() {
 		super();
 	}
-	public ProductDTO(int productId, String productName, @NotNull double price, String color, String dimmension,
-			String specification, String manufacturer, int quantity, CategoryDTO category) {
+
+	public ProductDTO( int productId,
+			String productName, double price,
+			String color,
+			String dimension,
+			 String specification,
+			 String manufacturer,
+			 int quantity, CategoryDTO category) {
 		super();
 		this.productId = productId;
 		this.productName = productName;
 		this.price = price;
 		this.color = color;
-		this.dimmension = dimmension;
+		this.dimension = dimension;
 		this.specification = specification;
 		this.manufacturer = manufacturer;
 		this.quantity = quantity;
@@ -78,73 +77,80 @@ public class ProductDTO {
 	public int getProductId() {
 		return productId;
 	}
+
 	public void setProductId(int productId) {
 		this.productId = productId;
 	}
+
 	public String getProductName() {
 		return productName;
 	}
+
 	public void setProductName(String productName) {
 		this.productName = productName;
 	}
+
 	public double getPrice() {
 		return price;
 	}
+
 	public void setPrice(double price) {
 		this.price = price;
 	}
+
 	public String getColor() {
 		return color;
 	}
+
 	public void setColor(String color) {
 		this.color = color;
 	}
-	public String getDimmension() {
-		return dimmension;
+
+	public String getDimension() {
+		return dimension;
 	}
-	public void setDimmension(String dimmension) {
-		this.dimmension = dimmension;
+
+	public void setDimension(String dimension) {
+		this.dimension = dimension;
 	}
+
 	public String getSpecification() {
 		return specification;
 	}
+
 	public void setSpecification(String specification) {
 		this.specification = specification;
 	}
+
 	public String getManufacturer() {
 		return manufacturer;
 	}
+
 	public void setManufacturer(String manufacturer) {
 		this.manufacturer = manufacturer;
 	}
+
 	public int getQuantity() {
 		return quantity;
 	}
+
 	public void setQuantity(int quantity) {
 		this.quantity = quantity;
 	}
+
 	public CategoryDTO getCategory() {
 		return category;
 	}
+
 	public void setCategory(CategoryDTO category) {
 		this.category = category;
 	}
-//	public CartDTO getCart() {
-//		return cart;
-//	}
-//	public void setCart(CartDTO cart) {
-//		this.cart = cart;
-//	}
+
 	@Override
 	public String toString() {
 		return "ProductDTO [productId=" + productId + ", productName=" + productName + ", price=" + price + ", color="
-				+ color + ", dimmension=" + dimmension + ", specification=" + specification + ", manufacturer="
+				+ color + ", dimension=" + dimension + ", specification=" + specification + ", manufacturer="
 				+ manufacturer + ", quantity=" + quantity + ", category=" + category + "]";
 	}
-//	@Override
-//	public String toString() {
-//		return "ProductDTO [productId=" + productId + ", productName=" + productName + ", price=" + price + ", color="
-//				+ color + ", dimmension=" + dimmension + ", specification=" + specification + ", manufacturer="
-//				+ manufacturer + ", quantity=" + quantity + ", category=" + category + ", cart=" + cart + "]";
-//	}
+	
 }

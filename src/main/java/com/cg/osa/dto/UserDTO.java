@@ -4,17 +4,20 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 @Entity
 @Table(name="user_table")
 public class UserDTO {
 	@Id
+	@NotNull (message="sorry id cannot be null")
 	int userId;
 	@Column(name="password")
-    @NotNull
+    @NotBlank(message="sorry password should not be blank")
 	String password;
 	@Column(name="role")
-	@NotNull
+	@NotBlank(message="sorry password should not be blank")
 	String role;
 	public UserDTO(int userId, String password, String role) {
 		super();
@@ -24,7 +27,7 @@ public class UserDTO {
 	}
 	public UserDTO() {
 		super();
-		// TODO Auto-generated constructor stub
+		
 	}
 	public int getUserId() {
 		return userId;

@@ -15,24 +15,27 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.MapKey;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name="cart_table")
 public class CartDTO {
+
 	@Id
 	private int cartId;
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name="cid")
 	private CustomerDTO customer;
-	@OneToMany(cascade=CascadeType.ALL)
-	//@JoinColumn(name="mapofproducts")
+	@OneToMany(cascade=CascadeType.PERSIST)
 	List<ProductDTO> products=new ArrayList<ProductDTO>();
-
+	
+	
 	public CartDTO(int cartId, CustomerDTO customer, List<ProductDTO> products) {
 		super();
 		this.cartId = cartId;
@@ -64,7 +67,6 @@ public CartDTO() {
 public String toString() {
 	return "CartDTO [cartId=" + cartId + ", customer=" + customer + ", products=" + products + "]";
 }
-	
 	
 	
 	

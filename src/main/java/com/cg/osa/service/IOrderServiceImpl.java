@@ -20,27 +20,33 @@ public class IOrderServiceImpl implements IOrderService{
 	@Autowired
 	private IOrderRepository  orderRepository;
 	
-	public OrderDTO addOrder(OrderDTO order) {
+	public OrderDTO addOrder(OrderDTO order) throws OrderException  {
+		if(orderRepository.existsById(order.getOrderId())) {
+			throw new OrderException("order already exist");
+		}
+		else {
 		orderRepository.save(order);
 		return order;
+		}
 	}
-	public OrderDTO updateOrder(OrderDTO order)throws OrderException {
+	public OrderDTO updateOrder(OrderDTO order) throws OrderException {
 		if(orderRepository.existsById(order.getOrderId())) {
 		orderRepository.save(order);
 		return order;
-		}else {
-			throw new OrderException("Id not found");
-			
+		}
+		else {
+			throw new OrderException("order not found");
 		}
 	}
 	public OrderDTO removeOrder(int id)  throws OrderException{
 		if(orderRepository.existsById(id)) {
 		OrderDTO order=orderRepository.findById(id).get();
-		if(orderRepository.existsById(id)) {
-			List<ProductDTO> l=order.getProductList();
-			
+		List<ProductDTO> l=order.getProductList();
+		  l.clear();
+		  order.setProductList(l);
+		  orderRepository.save(order);
 		orderRepository.deleteById(id);
-		}
+		
 		return order;
 	}
 		else {

@@ -6,7 +6,7 @@ import com.cg.osa.dto.OrderDTO;
 import com.cg.osa.exception.OrderException;
 
 public interface IOrderService {
-	OrderDTO addOrder(OrderDTO order);
+	OrderDTO addOrder(OrderDTO order)throws OrderException;
 	OrderDTO updateOrder(OrderDTO order)throws OrderException;
 	OrderDTO removeOrder(int id)throws OrderException;
 	OrderDTO viewOrderById(int id)throws OrderException;
