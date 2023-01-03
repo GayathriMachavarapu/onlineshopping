@@ -26,7 +26,7 @@ public class CustomerDTO {
 	@NotBlank(message = "Enter the last name")
 	String lastName;
 	@Column(name="mobileno")
-	@Pattern(regexp = "[6-9] {1}[0-9] {9}",message = "enter valid mobile no")
+	@Pattern(regexp = "[6-9]{1}[0-9]{9}",message = "enter valid mobile no")
 	String mobileNo;
 	@OneToOne(cascade=CascadeType.PERSIST)
 	@JoinColumn(name="address_id")

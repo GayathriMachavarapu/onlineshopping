@@ -14,7 +14,7 @@ public interface IUserRepository extends JpaRepository<UserDTO,Integer>{
 
 
 	@Query("select user from UserDTO user where user.userId=:id and user.password=:pwd")
-	List<UserDTO> validateUser(@Param("id")int id,@Param("pwd")String pwd);
+	UserDTO validateUser(@Param("id")int id,@Param("pwd")String pwd);
 
 }
 

@@ -10,5 +10,5 @@ public interface IUserService {
 	public UserDTO removeUser(int id) throws UserException;
 	public UserDTO viewUser(int id)throws UserException;
 	public boolean signOut(UserDTO user);
-	public List<UserDTO> validateUser(int id,String pwd)throws UserException;
+	public UserDTO validateUser(int id,String pwd)throws UserException;
 }

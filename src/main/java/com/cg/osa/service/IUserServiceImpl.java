@@ -56,16 +56,18 @@ public class IUserServiceImpl {
 		return true;
 	}
 	
-	public List<UserDTO> validateUser(int id,String pwd)throws UserException
-	{ 
-		if(urepository.existsById(id)) {
-			//List<UserDTO> l;
-			return urepository.validateUser(id,pwd);
+	
+
+		public UserDTO validateUser(int id,String pwd)throws UserException
+		{
+			
+			UserDTO credentials= urepository.validateUser(id,pwd);
+			if(credentials==null) {
+				throw new UserException("Login credentials mismatched");
+			}
+			else {
+				return credentials;
+			}
 			
 		}
-		else {
-			throw new UserException("validation unsuccessfull");
-		}
-		
-	}
 }

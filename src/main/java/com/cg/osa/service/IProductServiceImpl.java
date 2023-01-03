@@ -61,7 +61,7 @@ public class IProductServiceImpl implements IProductService{
 		List<ProductDTO> list= productrepository.findAll();
 
 		 List<ProductDTO> cat =	  list.stream()
-	 	  .filter(productDTO->productDTO.getCategory().getCatName().equals(cname))
+		 .filter(productDTO->productDTO.getCategory().getCatName().equals(cname))
 	 	  .collect(Collectors.toList());
 	 	  if(cat.size()!=0) {
 	 		  return cat;

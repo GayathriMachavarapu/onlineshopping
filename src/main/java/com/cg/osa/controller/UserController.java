@@ -63,7 +63,7 @@ public class UserController {
 	 * @description this method gives user details based on id and password 
 	 */
 	@GetMapping("/login/{id}/{pwd}")
-	public List<UserDTO> validateUser(@PathVariable("id") int id,@PathVariable("pwd") String password)throws UserException
+	public UserDTO validateUser(@PathVariable("id") int id,@PathVariable("pwd") String password)throws UserException
 	{
 		return impl.validateUser(id, password);
 	}
